@@ -17,28 +17,27 @@ function findExtensions(str) {
 }
 
 function isValid(str) {
-    const extensions = findExtensions(str);
-    if (extensions.length === 0) return isInDict(str);
+    return getPermutations(0, ['']).some(isInDict);
 
-    return getPermutations(str, extensions).some(isInDict);
-}
+    function getPermutations(startIdx, prefixes) {
+        if (startIdx >= str.length) return prefixes;
+        let endIdx = startIdx;
 
-function getPermutations(str, extensions) {
-    const prefix = str.substring(0, extensions[0][0]);
-    extensions = extensions.map(([start, end]) => str[start]);
+        while (endIdx < str.length && str[endIdx] === str[endIdx + 1]) {
+            endIdx++;
+        }
 
-    return generatePermutation(0, [prefix]);
-
-    function generatePermutation(index, prefixes) {
-        if (index === extensions.length) return prefixes;
-
-        prefixes = [
-            extensions[index],
-            extensions[index] + extensions[index],
-        ].flatMap(
-            letters => prefixes.map(prefix => prefix + letters)
+        const substrings = [];
+        if (endIdx - startIdx >= 2) {
+            substrings.push(str[startIdx], str[startIdx] + str[startIdx]);
+        } else {
+            substrings.push(str.substring(startIdx, endIdx + 1));
+        }
+        prefixes = substrings.flatMap(
+            substring => prefixes.map(prefix => prefix + substring)
         );
-        return generatePermutation(index + 1, prefixes);
+
+        return getPermutations(endIdx + 1, prefixes);
     }
 }
 
@@ -47,11 +46,14 @@ function isInDict(word) {
     return dict.includes(word);
 }
 
-const expected = [[2,4], [5,8]];
+let expected = [[2,4], [5,8]];
 console.assert(findExtensions('hellloooo').every(([start, end], idx) => expected[idx][0] === start && expected[idx][1] === end), 'Should return 2 pairs');
+expected = [[1,3]];
+console.assert(findExtensions('heeello').every(([start, end], idx) => expected[idx][0] === start && expected[idx][1] === end), 'Should return 1 pair');
 console.assert(findExtensions('abc').length === 0, 'Should be empty');
 console.assert(findExtensions('').length === 0, 'Should be empty for empty string');
 
 console.assert(isValid('hellloooo'), 'Should be valid');
 console.assert(isValid('hello'), 'Should be valid');
+console.assert(isValid('heeello'), 'Should be valid');
 console.assert(!isValid('abc'), 'Should be invalid');
