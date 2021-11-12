@@ -90,9 +90,9 @@ export function insertIndexOf(arr, target, left, right) {
 }
 
 const data = [1, 3, 3, 5]
-console.assert(indexOf(data, 2, 0, 3) === -1);
-console.assert(indexOf(data, 5, 0, 3) === 3);
-console.assert(indexOf(data, 3, 0, 3) === 1 || indexOf(data, 3, 0, 2) === 2);
+console.assert(indexOf(data, 2, 0, 3) === -1, 'Should not find 2');
+console.assert(indexOf(data, 5, 0, 3) === 3, 'Should find 5 in full array');
+console.assert(indexOf(data, 3, 0, 3) === 1 || indexOf(data, 3, 0, 2) === 2, 'Should find any of 3');
 console.assert(indexOf(data, 5, 0, 2) === -1, 'Should search in a range only');
 
 
