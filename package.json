@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/ScrambleCracker/Algorithms/issues"
   },
-  "homepage": "https://github.com/ScrambleCracker/Algorithms#readme"
+  "homepage": "https://github.com/ScrambleCracker/Algorithms#readme",
+  "dependencies": {
+    "@datastructures-js/priority-queue": "github:datastructures-js/priority-queue",
+    "datastructures-js": "^10.1.1"
+  }
 }
