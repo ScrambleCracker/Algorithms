@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ScrambleCracker/Algorithms#readme",
   "dependencies": {
     "@datastructures-js/priority-queue": "github:datastructures-js/priority-queue",
+    "@datastructures-js/queue": "github:datastructures-js/queue",
     "datastructures-js": "^10.1.1"
   }
 }
