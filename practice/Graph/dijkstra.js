@@ -16,9 +16,6 @@ export function findShortestPath(graph, start, end) {
         const [dist, head] = pq.dequeue().element;
         for (const [tail, weight] of graph[head]) {
             const nextWeight = dist + weight;
-            // safe to return first occurrence, because it's the shortest path
-            if (tail === end) return nextWeight;
-
             if (nextWeight < distances[tail]) {
                 distances[tail] = nextWeight;
                 pq.enqueue([nextWeight, tail]);
@@ -26,5 +23,5 @@ export function findShortestPath(graph, start, end) {
         }
     }
 
-    return Infinity;
+    return distances[end];
 }
