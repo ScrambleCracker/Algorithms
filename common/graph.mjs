@@ -20,3 +20,5 @@ export const weightedDirected = [
     [[5, 1]],
     [],
 ];
+
+export const edges = [[1,2],[2,3],[3,4],[1,4],[1,5]];
