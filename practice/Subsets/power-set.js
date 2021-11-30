@@ -1,6 +1,4 @@
-import { print } from "../../common/print.mjs";
-
-function getPowerSet(nums) {
+export function getPowerSet(nums) {
     const subsets = [[]];
 
     for (const num of nums) {
@@ -13,7 +11,7 @@ function getPowerSet(nums) {
     return subsets;
 }
 
-function getSubsetWithDuplicates(nums) {
+export function getSubsetWithDuplicates(nums) {
     nums.sort((a, b) => a - b);
     const subsets = [];
 
@@ -32,6 +30,3 @@ function getSubsetWithDuplicates(nums) {
     backtrack(0, []);
     return subsets;
 }
-
-print(getPowerSet([1,2,3,3]));
-print(getSubsetWithDuplicates([1,2,3,3]));
