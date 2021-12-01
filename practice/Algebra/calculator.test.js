@@ -5,6 +5,7 @@ describe('Calculators', () => {
         ['3 + 2*3', 9],
         ['3 - 3 / 2', 2],
         ['124 - 5     * 5*5', -1],
+        ['124 - 5*5*5 + 2', 1],
         ['+5', 5],
         ['-5', -5],
     ])('should evaluate expression', (expr, expected) => {
