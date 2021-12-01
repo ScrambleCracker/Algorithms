@@ -4,7 +4,7 @@ export class DSU {
 
     constructor(capacity = 100) {
         this.#parents = Array.from({length: capacity}, (_, idx) => idx);
-        this.#ranks = new Array(capacity).fill(0);
+        this.#ranks = new Array(capacity).fill(1);
     }
 
     find(x) {
@@ -19,16 +19,15 @@ export class DSU {
         y = this.find(y);
 
         if (x === y) {
-            return false;
-        } else if (this.#ranks[x] < this.#ranks[y]) {
-            this.#parents[x] = y;
-        } else if (this.#ranks[x] > this.#ranks[y]) {
-            this.#parents[y] = x;
-        } else {
-            this.#parents[y] = x;
-            this.#ranks[x]++;
+            return 0;
         }
-        return true;
+        if (this.#ranks[x] < this.#ranks[y]) {
+            [x, y] = [y, x];
+        }
+        this.#parents[y] = x;
+        this.#ranks[x] += this.#ranks[y]
+
+        return 1;
     }
 }
 
@@ -42,4 +41,21 @@ export function findRedundantConnection(edges) {
     }
 
     return [];
+}
+
+/**
+ *
+ * @param n {number} nodes count 0..n-1
+ * @param edges {Array<Array<number>>}
+ * @return {number}
+ */
+export function countComponents(n, edges) {
+    const dsu = new DSU(n);
+    let count = n;
+
+    for (const [head, tail] of edges) {
+        count -= dsu.union(head, tail);
+    }
+
+    return count;
 }

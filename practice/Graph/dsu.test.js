@@ -1,5 +1,5 @@
 import { edges } from "../../common/graph.mjs";
-import { findRedundantConnection } from "./disjoint-set-union";
+import { findRedundantConnection, countComponents } from "./disjoint-set-union";
 import { DSU } from "./disjoint-set-union";
 
 describe('Disjoint Set Union', () => {
@@ -16,5 +16,11 @@ describe('Disjoint Set Union', () => {
         expect(dsu.union(2, 3)).toBeTruthy();
         expect(dsu.union(1, 2)).toBeFalsy();
         expect(dsu.find(3)).toBe(1);
+    });
+
+    it('should count components', () => {
+        expect(countComponents(6, edges)).toEqual(2);
+        expect(countComponents(6, [[1,2]])).toEqual(5);
+        expect(countComponents(2, [[1,0]])).toEqual(1);
     });
 });
