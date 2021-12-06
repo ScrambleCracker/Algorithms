@@ -3,7 +3,7 @@ import { ListNode } from "../../common/list.mjs";
 import { print } from "../../common/print.mjs";
 
 /**
- * @param LinkedList[] lists
+ * @param lists ListNode[]
  * @return LinkedList
  */
 function mergeLists(lists) {
@@ -14,12 +14,15 @@ function mergeLists(lists) {
 
     const head = new ListNode();
     let tail = head;
-    while (heap.size() > 0) {
+    while (heap.size() > 1) { // if there is only 1 left no need to traverse it
         tail.next = heap.dequeue().element;
         tail = tail.next;
         if (tail.next !== null) {
             heap.enqueue(tail.next);
         }
+    }
+    if (heap.size()) {
+        tail.next = heap.dequeue().element;
     }
     return head.next;
 }
