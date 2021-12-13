@@ -13,6 +13,8 @@ describe('Array', () => {
         [[5, -100, 8], 8, 1],
         [[5, -100, 8], 100, 0],
         [[1,-1,5,-2,3], 3, 4],
+        [[0,0,0,3], 3, 4],
+        [[0,2,0,3], 3, 2],
     ])('should find max sum subarray length', (arr, k, expectedLen) => {
         expect(maxSubArrayLen(arr, k)).toBe(expectedLen);
     });
