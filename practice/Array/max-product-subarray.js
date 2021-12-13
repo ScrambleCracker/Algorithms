@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-function maxProduct(nums) {
+export function maxProduct(nums) {
     if (nums.length === 0) return 0;
 
     let max = nums[0],
