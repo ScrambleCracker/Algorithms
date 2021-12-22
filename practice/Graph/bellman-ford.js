@@ -10,7 +10,7 @@ export function getDistancesFromSource(edges, n, k) {
 
     for (let node = 1; node <= n; ++node) {
         for (const [source, target, weight] of edges) {
-            distances[target] = Math.max(
+            distances[target] = Math.min(
                 distances[target],
                 distances[source] + weight
             );
