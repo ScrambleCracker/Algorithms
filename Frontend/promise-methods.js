@@ -21,3 +21,29 @@ export function all(promises) {
         }
     });
 }
+
+/**
+ * @param {Array<Promise>} promises
+ * @return {Promise}
+ */
+export function any(promises) {
+    return new Promise((resolve, reject) => {
+        let pending = promises.length;
+        const errors = new Array(pending);
+        if (pending === 0) return reject(getAggregatedError());
+        for (let i = 0; i < promises.length; i++) {
+            promises[i]
+                .then((data) => resolve(data))
+                .catch((error) => {
+                    errors[i] = error;
+                    if (--pending === 0) {
+                        reject(getAggregatedError());
+                    }
+                });
+        }
+
+        function getAggregatedError() {
+            return new AggregateError('No Promise in Promise.any was resolved', errors);
+        }
+    });
+}
